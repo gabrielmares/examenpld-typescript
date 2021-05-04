@@ -11,3 +11,144 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@import-normalize;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.containerLogin {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* .containerLogin>* {
+  flex: 1 100%;
+} */
+
+
+.formCardLogin {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  height: 25em;
+  width: 22em;
+  background-color: rgba(255, 255, 255, 0.932);
+  min-width: 12em;
+  min-height: 15em;
+  border-radius: 10px;
+  z-index: 0;
+  margin-bottom: 6rem;
+}
+
+.card-body {
+  width: 90%;
+  flex: 1
+}
+
+.titleLoginForm {
+  text-align: center;
+  align-items: flex-start;
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: rgb(78, 78, 78);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputLoginForm {
+  display: block;
+  margin-top: 2%;
+  height: 2.4rem;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(78, 78, 78);
+  position: relative;
+  background-color: rgba(233, 230, 230, 0.76);
+  border-radius: 5px;
+  border: 1px solid rgb(187, 187, 187);
+  padding-left: 10px;
+}
+
+.backgroundImage {
+  background-image: url('./assets/img/lavado.jpg');
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backgroundImage::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(255, 255, 255, 0.342);
+}
+
+.labelForm {
+  color: rgb(78, 78, 78);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+
+.card-footer {
+  text-align: center;
+  font-size: 12px;
+  width: 80%;
+}
+
+.submitForm {
+  background-color: #007dc1;
+  border-radius: 5px;
+  border: 1px solid #007dc1;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  height: 2.4rem;
+  display: block;
+}
+
+
+.submitForm:disabled {
+  background-color: #838485;
+  border-radius: 5px;
+  border: 1px solid #838485;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  height: 2.4rem;
+  display: block;
+}
+
+.submitForm:active:hover {
+  background-color: #0061a7;
+}
+
+.submitForm:active {
+  position: relative;
+  top: 1px;
+}
+
+.loginError {
+  border: 1px solid red
+}
+
+.admin-page {
+  display: flex;
+  flex-direction: column;
+}
