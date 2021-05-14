@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 // eslint-disable-next-line
 import { firebaseApp } from './config';
-import { inicioSesion, Registro, SesionState, UsuarioLogueado } from '../interfaces'
-// const firebase = firebaseApp.initializeApp(AppFirebase)
+import { Data, inicioSesion, Registro, SesionState, UsuarioLogueado } from '../interfaces'
+import clienteAxios from '../axiosClient';
 
 
 
@@ -54,11 +54,12 @@ export const useAuth = (localState: SesionState) => {
                 user: {
                     email: localState.claims.email,
                     oficial: localState.claims.oficial,
-                    name: localState.claims.name
+                    name: localState.claims.name,
+                    token: localState.claims.token
                 }
             })
         }
-       firebaseApp.auth().onAuthStateChanged(async user => {
+        firebaseApp.auth().onAuthStateChanged(async user => {
             if (user) { //si tenemos un usuario en linea, obtenemos el token y lo regresamos
                 let tokenID = await user.getIdTokenResult()
                 if (tokenID) {
@@ -67,18 +68,20 @@ export const useAuth = (localState: SesionState) => {
                         user: {
                             email: tokenID.claims.email,
                             oficial: tokenID.claims.oficial,
-                            name: tokenID.claims.name
+                            name: tokenID.claims.name,
+                            token: tokenID.token
                         },
                         isSignedIn: true,
                     })
                 }
             }
-            saveLogged({
+            return saveLogged({
                 pending: false,
                 user: {
                     email: "",
                     oficial: false,
-                    name: ""
+                    name: "",
+                    token: ""
                 },
                 isSignedIn: false,
             })
@@ -95,7 +98,6 @@ export const saveDocument = async (examen: any) => {
     try {
         await firebaseApp.firestore().collection('evaluaciones').doc(examen.usuario.email).set(examen)
             .then(res => {
-                // console.log(res)
                 return res;
             })
 
@@ -107,7 +109,7 @@ export const saveDocument = async (examen: any) => {
 
 
 // generar email de restablecimiento de contraseña
-export const ResetPassword = async ({ email }: Registro) => {
+export const ResetPassword = async (email: string) => {
     let mensage;
     await firebaseApp.auth().sendPasswordResetEmail(email)
         .then(resp => {
@@ -123,7 +125,6 @@ export const ResetPassword = async ({ email }: Registro) => {
 // revisar si ya realizo el examen anteriormente
 export const OnlyOne = async ({ email }: Registro) => {
     const doc = await firebaseApp.firestore().collection('evaluaciones').doc(email).get();
-    // console.log(doc.exists)
     return doc;
 
 }
@@ -159,3 +160,29 @@ export const OnlyOne = async ({ email }: Registro) => {
 
 //     return list;
 // }
+
+// funcion para descargar la lista de usuarios registrados
+export const ListaUsuariosFB = (token: string, actualizar: boolean) => {
+    const [usuariosFB, setUsuariosFB] = useState<Data[]>()
+    const [pending, setPending] = useState(true)
+
+
+    useEffect(() => {
+        if ((pending && token) || actualizar) {
+            clienteAxios(token).get('/usuarios')
+                .then(usuariosRegistrados => {
+                    setUsuariosFB(usuariosRegistrados.data.users)
+                    return setPending(false)
+                })
+                .catch(() => {
+                    return setPending(false)
+                })
+        }
+    }, [token, pending, actualizar])
+
+    return {
+        pending,
+        usuariosFB
+    }
+
+}

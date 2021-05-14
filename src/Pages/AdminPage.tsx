@@ -1,21 +1,30 @@
-import { useContext } from 'react'
-import { SessionContext } from '../Context/SessionContext';
-import { useHistory } from 'react-router-dom'
+import React, { useContext } from "react"
+import { Cargando } from "../Components/Cargando"
+import RegistroUsuarios from "../Components/RegistroUsuarios"
+import TablaUsuarios from "../Components/TablaUsuarios"
+import { SessionContext } from "../Context/SessionContext"
+import { ListaUsuariosFB } from "../firebase/firebase"
 
-const AdminPage = () => {
-    let history = useHistory()
-    const { CerrarSesion } = useContext(SessionContext)
-    const endSesion = () => {
-        CerrarSesion()
-        history.push('/')
-    }
+
+
+const AdminPage: React.ElementType = () => {
+
+    const { localState: { claims: { token } }, actualizar } = useContext(SessionContext)
+
+    const { usuariosFB, pending } = ListaUsuariosFB(token, actualizar)
+
+
+    if (pending) return <Cargando mensaje='Recuperando lista de usuarios' />
+
     return (
         <div className='admin-page'>
-            <h1>Pagina de administracion</h1>
-            <button onClick={() => endSesion()}>
-                Salir
-            </button>
-
+            <h1 className='titlePage'>Gestion de usuarios</h1>
+            <div className='containerAdmin'>
+                <RegistroUsuarios />
+                <TablaUsuarios
+                    data={usuariosFB}
+                />
+            </div>
         </div>
     );
 }
