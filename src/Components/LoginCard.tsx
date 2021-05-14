@@ -1,11 +1,11 @@
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { SessionContext } from '../Context/SessionContext'
 import useLogin from '../hook/useLogin'
 
 
 
-const LoginCard = () => {
+const LoginCard: React.ElementType = () => {
     let history = useHistory()
     const { InciarSesion, localState: { errores } } = useContext(SessionContext)
 
@@ -13,14 +13,14 @@ const LoginCard = () => {
 
 
     const handleSubmit = async () => {
-        const handlseSesion: number | any = await InciarSesion({ email, password })
-        if (handlseSesion === 200) {
+        const iniciarSesion: number | any = await InciarSesion({ email, password })
+        if (iniciarSesion === 200) {
             return history.push('/administracion')
         }
-        if (handlseSesion === 201) {
-            return history.push('/examen')
+        if (iniciarSesion === 201) {
+            return history.push('/')
         }
-        return handlseSesion
+        return iniciarSesion
     }
 
 

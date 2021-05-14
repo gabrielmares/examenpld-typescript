@@ -1,9 +1,10 @@
+import React from "react"
 
-const LoginContainer = (props: any) => {
+const LoginContainer: React.ElementType = ({ children }) => {
     return (
         <div className="containerLogin">
             <div className=' backgroundImage'>
-                {props.children}
+                {children}
             </div>
         </div>
     )
