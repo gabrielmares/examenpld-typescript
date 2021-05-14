@@ -1,20 +1,16 @@
 import { useContext, useEffect } from 'react'
-import { useHistory, RouteProps, Route } from 'react-router-dom';
+import { useHistory, Route } from 'react-router-dom';
 import { SessionContext } from '../Context/SessionContext';
 import { useAuth } from '../firebase/firebase';
 import TestPage from '../Pages/TestPage';
-
-type PrivateRouteProps = {
-    path: RouteProps['path'];
-    component: React.ElementType;
-};
+import { Cargando } from './Cargando';
+import NavBar from './NavBar';
 
 
-
-export const PrivateRoute: React.FunctionComponent<PrivateRouteProps> = ({
+export const PrivateRoute: React.ElementType = ({
     component: Component,
     ...routeProps
-}): any => {
+}) => {
 
     let history = useHistory()
     const { localState, dispatch } = useContext(SessionContext);
@@ -30,14 +26,18 @@ export const PrivateRoute: React.FunctionComponent<PrivateRouteProps> = ({
         // eslint-disable-next-line
     }, [pending, isSignedIn])
 
-    if (pending) return false;
+    if (pending) return <Cargando mensaje='Recuperando sesion...' />
 
     if (!user.email && !isSignedIn) {
-        history.push('/')
+        history.push('/login')
     }
 
     return (
-        <Route {...routeProps} render={() => user.oficial ? <Component /> : <Route path='/examen' component={TestPage} />} />
+        <>
+            <NavBar />
+            <Route {...routeProps} render={() => user.oficial ? <Component /> : <Route path='/' component={TestPage} />} />
+        </>
+
     )
 }
 
