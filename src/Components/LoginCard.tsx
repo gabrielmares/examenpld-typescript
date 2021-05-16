@@ -18,7 +18,7 @@ const LoginCard: React.ElementType = () => {
             return history.push('/administracion')
         }
         if (iniciarSesion === 201) {
-            return history.push('/')
+            return history.push('/examen')
         }
         return iniciarSesion
     }

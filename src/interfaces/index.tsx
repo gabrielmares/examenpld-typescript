@@ -1,3 +1,5 @@
+import { EnumType } from "typescript";
+
 export interface SesionState {
     claims: Claims | any,
     loader: boolean,
@@ -39,7 +41,7 @@ export interface Registro {
     nombre: string,
     email: string,
     password: string,
-    oficial: boolean | string,
+    oficial: boolean | any,
 }
 
 export interface inicioSesion {

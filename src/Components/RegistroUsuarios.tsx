@@ -1,15 +1,20 @@
 import { useContext, useState } from 'react'
-import { clienteAxios2 } from '../axiosClient';
+import clienteAxios from '../axiosClient';
 import { SessionContext } from '../Context/SessionContext';
 import { AlertaError, AlertaExitoso } from '../helpers/Alertas';
 import { Registro } from '../interfaces'
 
-const RegistroUsuarios = () => {
-    const [form, setForm] = useState({
-        email: '',
-        password: '',
-        nombre: '',
-        oficial: ""
+interface RegistroProps {
+    primerOficial?: boolean
+}
+
+
+const RegistroUsuarios: React.FunctionComponent<RegistroProps> = ({ primerOficial }) => {
+    const [form, setForm] = useState<Registro>({
+        email: "",
+        password: "",
+        nombre: "",
+        oficial: null
     })
     const { email, password, nombre, oficial } = form
 
@@ -23,9 +28,9 @@ const RegistroUsuarios = () => {
     }
 
     const handleSubmit = () => {
-        return clienteAxios2(token).post('/nuevo', {
+        return clienteAxios(token).post('/nuevo', {
             ...form,
-            OC: oficial
+            OC: primerOficial ? true : oficial
         })
             .then(() => {
                 listaDeUsuarios()
@@ -36,8 +41,8 @@ const RegistroUsuarios = () => {
     }
 
     return (
-        <div className='formCardRegister'>
-            <h1 className="titleLoginForm">Nuevo usuario</h1>
+        <div className={`formCardRegister ${primerOficial && 'card-oficialRegister'}`}>
+            <h1 className="titleLoginForm">{primerOficial ? 'Registro del Oficial de cumplimiento' : 'Nuevo usuario'}</h1>
             <form className='cardbodyRegister'>
                 <div className='inputGroup'>
                     <div className='inputGroup' >
@@ -76,7 +81,12 @@ const RegistroUsuarios = () => {
                     />
                 </div>
                 <div className='inputGroup' style={{ marginBottom: '1em', marginTop: '1em', display: 'block', marginLeft: '2px' }}>
-                    <input type='checkbox' value={oficial} onChange={() => handleChange(!oficial, 'oficial')} /> Oficial de cumplimiento
+                    <input type='checkbox'
+                        value={primerOficial ? primerOficial : oficial}
+                        onChange={() => handleChange(!oficial, 'oficial')}
+                        disabled={primerOficial}
+                        defaultChecked={primerOficial}
+                    /> Oficial de cumplimiento
                 </div>
 
 

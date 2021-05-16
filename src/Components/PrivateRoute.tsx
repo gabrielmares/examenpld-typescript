@@ -35,7 +35,7 @@ export const PrivateRoute: React.ElementType = ({
     return (
         <>
             <NavBar />
-            <Route {...routeProps} render={() => user.oficial ? <Component /> : <Route path='/' component={TestPage} />} />
+            <Route {...routeProps} render={() => user.oficial ? <Component /> : <Route path='/examen' component={TestPage} />} />
         </>
 
     )

@@ -223,6 +223,23 @@ td {
   width: 200px;
 }
 
+.oficialRegister {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  height: 25em;
+  width: 22em;
+  background-color: rgba(255, 255, 255, 0.932);
+  min-width: 12em;
+  min-height: 15em;
+  border-radius: 10px;
+  z-index: 0;
+  padding-bottom: 1rem;
+}
+
+
 
 
 /* MEDIA QUERYS Mobile first */
@@ -378,13 +395,17 @@ td {
     margin-left: 5%;
   }
 
-  .columnaNombre{
+  .columnaNombre {
     max-width: 140px;
     word-wrap: break-word;
   }
 
-  .columnaAcciones{
+  .columnaAcciones {
     width: 50px;
+  }
+
+  .card-oficialRegister {
+    margin-left: 0;
   }
 }
 
@@ -403,7 +424,7 @@ td {
     max-width: 260px;
   }
 
-  .columnaAcciones{
+  .columnaAcciones {
     width: 50px;
   }
 

@@ -11,7 +11,7 @@ const NavBarLinks = () => {
                 <>
                     <Link to='/administracion' className='link'>Administracion</Link>
                     <Link to='/resultados' className='link'>Resultados</Link>
-                    <Link to='/' className='link'>Examen</Link>
+                    <Link to='/examen' className='link'>Examen</Link>
                 </>
             )}
 

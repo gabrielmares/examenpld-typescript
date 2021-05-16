@@ -14,13 +14,14 @@ const AdminPage: React.ElementType = () => {
     const { usuariosFB, pending } = ListaUsuariosFB(token, actualizar)
 
 
-    if (pending) return <Cargando mensaje='Recuperando lista de usuarios' />
+    if (pending) return <Cargando mensaje='Recuperando lista de usuarios, Espere...' />
 
     return (
         <div className='admin-page'>
             <h1 className='titlePage'>Gestion de usuarios</h1>
             <div className='containerAdmin'>
-                <RegistroUsuarios />
+                <RegistroUsuarios
+                    primerOficial={false} />
                 <TablaUsuarios
                     data={usuariosFB}
                 />

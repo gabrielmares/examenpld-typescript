@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const clienteAxios = (token: string) => {
+const clienteAxios = (token?: string) => {
     return axios.create({
         baseURL: process.env.REACT_APP_API_URL2,
         headers: {
@@ -12,12 +12,10 @@ const clienteAxios = (token: string) => {
 
 export default clienteAxios;
 
-export const clienteAxios2 = (token: string) => {
+export const clienteAxios2 = () => {
     return axios.create({
-        baseURL: process.env.REACT_APP_API_URL,
-        headers: {
-            'authorization': `Bearer ${token}`
-        }
+        baseURL: process.env.REACT_APP_API_URL
+
     })
 };
 

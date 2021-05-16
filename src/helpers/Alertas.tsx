@@ -1,6 +1,6 @@
 import { UsuarioAPI } from '../interfaces';
 import Swal from 'sweetalert2'
-import { clienteAxios2 } from '../axiosClient';
+import clienteAxios from '../axiosClient';
 import { ResetPassword } from '../firebase/firebase';
 
 
@@ -23,7 +23,7 @@ export const AccionesUsuarios = async ({ uid, displayName, email }: UsuarioAPI, 
                 .then(() => AlertaExitoso(accion))
                 .catch(() => AlertaError(accion))
         }
-        return clienteAxios2(token).delete('/delete', {
+        return clienteAxios(token).delete('/delete', {
             params: uid
         })
             .then(() => AlertaExitoso(accion))
