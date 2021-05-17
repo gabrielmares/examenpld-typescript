@@ -9,13 +9,15 @@ export const FirstLauch = () => {
     let history = useHistory()
 
     useEffect(() => {
-        clienteAxios().get('/deployed')
-            .then(respuesta => {
-                if (respuesta.data.longitud > 0) {
-                    setPendiente(false)
-                    return history.push('/login')
-                }
-            })
+        if (pendiente) {
+            clienteAxios().get('/deployed')
+                .then(respuesta => {
+                    if (respuesta.data.longitud > 0) {
+                        setPendiente(false)
+                        return history.push('/login')
+                    }
+                })
+        }
         // eslint-disable-next-line
     }, [pendiente])
 
