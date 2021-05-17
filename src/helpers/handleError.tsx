@@ -1,5 +1,9 @@
 
-const handleErrors = ({ code }: any) => {
+interface CodeError {
+    code: string
+}
+
+const handleErrors = ({ code }: CodeError) => {
     switch (code) {
         case 'auth/invalid-email':
         case 'auth/user-not-found':

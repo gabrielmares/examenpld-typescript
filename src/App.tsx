@@ -4,15 +4,19 @@ import LoginPage from "./Pages/LoginPage";
 import { PrivateRoute } from "./Components/PrivateRoute";
 import AdminPage from "./Pages/AdminPage";
 import TestPage from "./Pages/TestPage";
+import ExamenesResueltos from "./Pages/TestResults";
+import { FirstLauch } from "./Pages/FirstLauch";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthContext>
         <Switch>
-          <Route exact path='/' component={LoginPage} />
+          <Route exact path='/' component={FirstLauch} />
+          <Route exact path='/login' component={LoginPage} />
           <PrivateRoute path='/administracion' component={AdminPage} />
           <PrivateRoute path='/examen' component={TestPage} />
+          <PrivateRoute path='/resultados' component={ExamenesResueltos} />
         </Switch>
       </AuthContext>
     </BrowserRouter>
