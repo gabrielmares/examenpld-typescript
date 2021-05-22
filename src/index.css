@@ -239,6 +239,11 @@ td {
   padding-bottom: 1rem;
 }
 
+.contenedorExamen {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFF;
+}
 
 
 
@@ -317,6 +322,17 @@ td {
     margin-left: 10%;
   }
 
+
+  .contenedorExamen {
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+
+  .contenedorPregunta {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
 }
 
 
@@ -327,7 +343,6 @@ td {
     display: flex;
     background-color: #007dc1;
     color: aliceblue;
-    /* max-height: 50px; */
     align-items: center;
     justify-content: space-between;
   }
@@ -407,6 +422,21 @@ td {
   .card-oficialRegister {
     margin-left: 0;
   }
+
+  .contenedorExamen {
+    margin-right: 13%;
+    margin-left: 13%;
+  }
+
+  .contenedorPregunta {
+    margin-right: 100px;
+    padding-left: 40px;
+  }
+
+  .estilosPregunta {
+    letter-spacing: 1.5px;
+  }
+
 }
 
 @media (min-width:1100px) {
@@ -428,5 +458,9 @@ td {
     width: 50px;
   }
 
+  .contenedorExamen {
+    margin-right: 13%;
+    margin-left: 13%;
+  }
 
 }

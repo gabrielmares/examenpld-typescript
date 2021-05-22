@@ -1,4 +1,3 @@
-import { EnumType } from "typescript";
 
 export interface SesionState {
     claims: Claims | any,
@@ -198,3 +197,69 @@ export interface Metadata {
 }
 
 
+// types para el context del examen
+
+export interface TestContextProps {
+    respuestas: examenTypes,
+    seleccionRespuesta: any,
+    respuestasCorrectas: any[],
+    evaluacionDeExamen: () => void
+}
+
+export interface Questionario {
+    listadoPreguntas: Pregunta[],
+}
+
+export interface Pregunta {
+    indice: number,
+    pregunta: string,
+    listaRespuestas: string[],
+
+}
+
+export interface respuestasOpcionales {
+    respuesta: string,
+}
+
+
+export interface examenTypes {
+    0: number | string,
+    1: number | string,
+    2: number | string,
+    3: number | string,
+    4: number | string,
+    5: number | string,
+    6: number | string,
+    7: number | string,
+    8: number | string,
+    9: number | string,
+    10: number | string,
+    11: number | string,
+}
+
+export const examenInitialProps: examenTypes = {
+    0: "",
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+    6: "",
+    7: "",
+    8: "",
+    9: "",
+    10: "",
+    11: "",
+}
+
+export interface evaluacionDelUsuario {
+    usuario: examenUsuario,
+    evaluacion: boolean[],
+    opciones: examenTypes[],
+    calificacion: number
+}
+
+interface examenUsuario {
+    email: string,
+    nombre: string
+}
