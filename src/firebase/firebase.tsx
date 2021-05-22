@@ -186,3 +186,34 @@ export const ListaUsuariosFB = (token: string, actualizar: boolean) => {
     }
 
 }
+
+
+export const useExamen = (email: string, oficial: boolean) => {
+    const [pendiente, setPendiente] = useState(true)
+    const [existe, setExiste] = useState(false)
+
+
+
+    useEffect(() => {
+        if (!email) return
+        if (oficial) {
+            setExiste(false)
+            return setPendiente(false)
+        }
+        firebaseApp
+            .firestore()
+            .collection('evaluaciones')
+            .doc(email)
+            .get()
+            .then(evaluar => {
+                setExiste(evaluar.exists)
+                return setPendiente(false)
+            })
+    }, [email, oficial])
+
+
+    return {
+        pendiente,
+        existe
+    }
+}

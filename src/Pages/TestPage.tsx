@@ -6,21 +6,34 @@ import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { SessionContext } from "../Context/SessionContext";
 import { AlertaError, AlertaExitoso } from "../helpers/Alertas";
+import { useExamen } from "../firebase/firebase";
 
 const TestPage = () => {
     let history = useHistory()
     const { evaluacionDeExamen } = useContext(TestContext)
-    const { CerrarSesion } = useContext(SessionContext)
+    const { CerrarSesion, localState: { claims: { email, oficial } } } = useContext(SessionContext)
 
     const evualuarExamen = async () => {
         const resultado: any = await evaluacionDeExamen()
         // si el examen se almaceno, enviamos el msg al usuario, cerramos la sesion y reedirigimos a la pantalla de inicio de sesion
         if (resultado === 200) {
             AlertaExitoso('Examen guardado')
+            if (oficial) return
             CerrarSesion()
             return history.push('/login')
         }
         AlertaError('No se pudo guardar el examen')
+    }
+
+    const { pendiente, existe } = useExamen(email, oficial)
+
+    if (pendiente) return <span>Validando usuario</span>
+
+    if (existe) {
+        AlertaError('Has agotado los intentos permitidos').then(() => {
+            CerrarSesion()
+            history.push('/login')
+        })
     }
 
     return (
