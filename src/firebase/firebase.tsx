@@ -5,7 +5,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 // eslint-disable-next-line
 import { firebaseApp } from './config';
-import { Data, inicioSesion, Registro, SesionState, UsuarioLogueado } from '../interfaces'
+import { Data, evaluacionDelUsuario, inicioSesion, Registro, SesionState, UsuarioLogueado } from '../interfaces'
 import clienteAxios from '../axiosClient';
 
 
@@ -94,7 +94,7 @@ export const useAuth = (localState: SesionState) => {
 
 
 // grabar un documento en la coleccion
-export const saveDocument = async (examen: any) => {
+export const saveDocument = async (examen: evaluacionDelUsuario) => {
     try {
         await firebaseApp.firestore().collection('evaluaciones').doc(examen.usuario.email).set(examen)
             .then(res => {
