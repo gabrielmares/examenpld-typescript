@@ -6,6 +6,7 @@ import AdminPage from "./Pages/AdminPage";
 import TestPage from "./Pages/TestPage";
 import ExamenesResueltos from "./Pages/TestResults";
 import { FirstLauch } from "./Pages/FirstLauch";
+import { ExamenContext } from "./Context/testPage/testContext";
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
           <Route exact path='/' component={FirstLauch} />
           <Route exact path='/login' component={LoginPage} />
           <PrivateRoute path='/administracion' component={AdminPage} />
-          <PrivateRoute path='/examen' component={TestPage} />
+          <ExamenContext>
+            <PrivateRoute path='/examen' component={TestPage} />
+          </ExamenContext>
           <PrivateRoute path='/resultados' component={ExamenesResueltos} />
         </Switch>
       </AuthContext>
