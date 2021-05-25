@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { SessionContext } from "../Context/SessionContext";
 import { AlertaError, AlertaExitoso } from "../helpers/Alertas";
 import { useExamen } from "../firebase/firebase";
+import { Cargando } from "../Components/Cargando";
 
 const TestPage = () => {
     let history = useHistory()
@@ -27,7 +28,7 @@ const TestPage = () => {
 
     const { pendiente, existe } = useExamen(email, oficial)
 
-    if (pendiente) return <span>Validando usuario</span>
+    if (pendiente) return <Cargando mensaje='Validando usuario' />
 
     if (existe) {
         AlertaError('Has agotado los intentos permitidos').then(() => {
@@ -37,32 +38,30 @@ const TestPage = () => {
     }
 
     return (
-        <div style={{ backgroundColor: '#e6e6e6' }}>
-            <ExamenContenedor>
-                <ExamenHeader />
-                {ListaPreguntas.map(({ pregunta, respuestas }: any, index) => (
-                    <PreguntaExamen
-                        key={Math.random()}
-                        indice={index}
-                        pregunta={pregunta}
-                        listaRespuestas={respuestas}
-                    />
-                ))}
-                <button
-                    className='submitForm'
-                    value='Enviar evaluacion'
-                    onClick={() => evualuarExamen()}
-                    style={{
-                        marginBottom: 50,
-                        marginTop: 50,
-                        width: 200,
-                        alignSelf: 'center'
-                    }}
-                >
-                    Enviar evaluacion
+        <ExamenContenedor>
+            <ExamenHeader />
+            {ListaPreguntas.map(({ pregunta, respuestas }: any, index) => (
+                <PreguntaExamen
+                    key={Math.random()}
+                    indice={index}
+                    pregunta={pregunta}
+                    listaRespuestas={respuestas}
+                />
+            ))}
+            <button
+                className='submitForm'
+                value='Enviar evaluacion'
+                onClick={() => evualuarExamen()}
+                style={{
+                    marginBottom: 50,
+                    marginTop: 50,
+                    width: 200,
+                    alignSelf: 'center'
+                }}
+            >
+                Enviar evaluacion
                     </button>
-            </ExamenContenedor>
-        </div >
+        </ExamenContenedor>
 
     );
 }

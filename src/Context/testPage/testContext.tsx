@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from 'react'
 import { saveDocument } from '../../firebase/firebase'
+// import generaPDF from '../../helpers/GeneradorPDF'
 import { evaluacionDelUsuario, examenInitialProps, TestContextProps } from '../../interfaces'
 import { SessionContext } from '../SessionContext'
 import { examenRdx } from './testReducer'
@@ -49,14 +50,13 @@ export const ExamenContext = ({ children }: any) => {
     }
 
 
-
     return (
         <TestContext.Provider
             value={{
                 respuestas,
                 seleccionRespuesta,
                 respuestasCorrectas,
-                evaluacionDeExamen
+                evaluacionDeExamen,
             }}>
             {children}
         </TestContext.Provider>

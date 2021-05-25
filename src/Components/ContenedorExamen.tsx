@@ -1,11 +1,14 @@
 
-const ExamenContenedor = ({ children }: any) => {
+const Contenedor = ({ children }: any) => {
 
     return (
-        <div className='contenedorExamen'>
-            {children}
+        <div style={{ backgroundColor: '#e6e6e6', display: 'block' }}>
+            <div className='contenedorExamen'>
+                {children}
+            </div>
         </div>
+
     );
 }
 
-export default ExamenContenedor;
+export default Contenedor;

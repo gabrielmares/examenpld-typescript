@@ -16,10 +16,11 @@ function App() {
           <Route exact path='/' component={FirstLauch} />
           <Route exact path='/login' component={LoginPage} />
           <PrivateRoute path='/administracion' component={AdminPage} />
+          <PrivateRoute path='/resultados' component={ExamenesResueltos} />
           <ExamenContext>
             <PrivateRoute path='/examen' component={TestPage} />
           </ExamenContext>
-          <PrivateRoute path='/resultados' component={ExamenesResueltos} />
+
         </Switch>
       </AuthContext>
     </BrowserRouter>
