@@ -296,6 +296,12 @@ td {
   margin-left: 10px;
 }
 
+.eliminarEvaluacion {
+  margin-bottom: 5px;
+  color: #b92929;
+  cursor: pointer;
+}
+
 /* MEDIA QUERYS Mobile first */
 
 

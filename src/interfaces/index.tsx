@@ -259,7 +259,7 @@ export interface evaluacionDelUsuario {
     calificacion: number
 }
 
-interface examenUsuario {
+export interface examenUsuario {
     email: string,
     nombre: string
 }

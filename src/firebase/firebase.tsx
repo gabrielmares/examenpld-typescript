@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
@@ -216,4 +215,15 @@ export const useExamen = (email: string, oficial: boolean) => {
         pendiente,
         existe
     }
+}
+
+export const EliminarExamen = (email: string): any => {
+    return firebaseApp
+        .firestore()
+        .collection('evaluaciones')
+        .doc(email)
+        .delete()
+        .then(() => 200)
+        .catch(() => 404)
+
 }

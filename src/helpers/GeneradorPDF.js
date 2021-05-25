@@ -17,7 +17,7 @@ const generaPDF = (examen) => {
     // calificacion en la esquina derecha
     let titulo = `Nombre: ${nombre}`;
     doc.text(1, 1, titulo)
-    doc.text(6, 1, `Calificacion: ${calificacion.toFixed(2)}`)
+    doc.text(6, 1, `Calificacion: ${Number(calificacion).toFixed(2)}`)
     positionY = 1.7
     // console.table(doc.getFontList())
     // iteramos por cada pregunta y la agregamos al documento con un ancho de 6.8" en cada linea
