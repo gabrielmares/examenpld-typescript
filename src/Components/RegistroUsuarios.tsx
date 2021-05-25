@@ -50,7 +50,7 @@ const RegistroUsuarios: React.FunctionComponent<RegistroProps> = ({ primerOficia
                         <input
                             name='nombre'
                             type='text'
-                            value={nombre}
+                            value={nombre || ""}
                             key={332}
                             className={`${errores === 502 && 'loginError'} inputLoginForm `}
                             onChange={({ target }) => handleChange(target.value, 'nombre')}
