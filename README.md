@@ -22,3 +22,14 @@ Con comando create-react-app template typescript
 [FontAwesome](https://www.npmjs.com/package/@fortawesome/fontawesome-svg-core)
 
 [sweetalert2](https://www.npmjs.com/package/sweetalert2)
+
+
+## Flexbox
+
+En este proyecto no se utilizo ningun framework CSS. Todo el proyecto fue realizado con CSS puro, sin Pre-Procesador.
+
+En la siguiente carpeta se muestran ejemplos del proyecto.
+
+Debido a la sensiblidad de la informacion, se han tachado los nombres de las personas que realizaron la evaluacion
+
+[Ejemplos](https://github.com/gabrielmares/examenpld-typescript/tree/main/ejemplos)
