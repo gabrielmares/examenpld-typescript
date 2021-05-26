@@ -1,7 +1,7 @@
-import { UsuarioAPI } from '../interfaces';
+import { examenUsuario, UsuarioAPI } from '../interfaces';
 import Swal from 'sweetalert2'
 import clienteAxios from '../axiosClient';
-import { ResetPassword } from '../firebase/firebase';
+import { EliminarExamen, ResetPassword } from '../firebase/firebase';
 
 
 export const AccionesUsuarios = async ({ uid, displayName, email }: UsuarioAPI, accion: string, token: string) => {
@@ -46,4 +46,28 @@ export const AlertaError = (accion: string) => {
         title: accion,
         text: 'No se pudo completar la accion'
     })
+}
+
+
+export const EliminarEvaluacionUsuario = async ({ email, nombre }: examenUsuario) => {
+
+    // return console.log(email, nombre)
+
+    const Alerta = await Swal.fire({
+        title: 'Eliminar examen',
+        text: `Desea eliminar el examen de  ${nombre}?`,
+        icon: 'warning',
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `Si, Eliminar`,
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+    });
+    if (Alerta.isConfirmed) {
+        return EliminarExamen(email)
+            .then(() => AlertaExitoso('Elimino'))
+            .catch(() => AlertaError('Error'))
+    }
 }

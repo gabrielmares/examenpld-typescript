@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-// import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 // eslint-disable-next-line
 import { firebaseApp } from './config';
-import { Data, evaluacionDelUsuario, inicioSesion, Registro, SesionState, UsuarioLogueado } from '../interfaces'
+import { Data, evaluacionDelUsuario, inicioSesion, listaExamenes, Registro, SesionState, UsuarioLogueado } from '../interfaces'
 import clienteAxios from '../axiosClient';
 
 
@@ -131,35 +130,35 @@ export const OnlyOne = async ({ email }: Registro) => {
 
 
 // funcion que descarga los examenes ya realizados
-// export const ListExamen = () => {
-//     const [list, setList] = React.useState<listaExamenes>({
-//         pending: true,
-//         examenes: []
-//     })
+export const ListaExamenes = () => {
+    const [lista, setLista] = React.useState<listaExamenes>({
+        pending: true,
+        examenes: []
+    })
 
-//     // const [pendind, setPending] = React.useState(true)
-//     React.useEffect(() => {
-//         function get() {
-//             firebase.firestore().collection('evaluaciones').onSnapshot(snapshot);
-//         }
-//         get();
-//     }, [])
-//     const snapshot = (snapshot: { docs: { id: any; data: () => any; }[]; }): any => {
-//         const total = snapshot.docs.map((producto: { id: string; data: () => any; }) => {
-//             return {
-//                 id: producto.id,
-//                 ...producto.data()
-//             }
-//         })
-//         setList({
-//             pending: false,
-//             examenes: total
-//         })
+    // const [pendind, setPending] = React.useState(true)
+    React.useEffect(() => {
+        function get() {
+            firebaseApp.firestore().collection('evaluaciones').onSnapshot(snapshot);
+        }
+        return get();
+    }, [])
+    const snapshot = (snapshot: { docs: { id: any; data: () => any; }[]; }): any => {
+        const total = snapshot.docs.map((producto: { id: string; data: () => any; }) => {
+            return {
+                id: producto.id,
+                ...producto.data()
+            }
+        })
+        setLista({
+            pending: false,
+            examenes: total
+        })
 
-//     }
+    }
 
-//     return list;
-// }
+    return lista;
+}
 
 // funcion para descargar la lista de usuarios registrados
 export const ListaUsuariosFB = (token: string, actualizar: boolean) => {
@@ -216,4 +215,15 @@ export const useExamen = (email: string, oficial: boolean) => {
         pendiente,
         existe
     }
+}
+
+export const EliminarExamen = (email: string): any => {
+    return firebaseApp
+        .firestore()
+        .collection('evaluaciones')
+        .doc(email)
+        .delete()
+        .then(() => 200)
+        .catch(() => 404)
+
 }
