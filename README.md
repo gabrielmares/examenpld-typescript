@@ -14,7 +14,11 @@ Solo el oficial tiene permisos para crear nuevos usuarios o eliminar usuarios as
 Con comando create-react-app template typescript
 
 [JsPDF](https://www.npmjs.com/package/jspdf)
+
 [Firebase](https://www.npmjs.com/package/firebase)
+
 [Axios](https://www.npmjs.com/package/axios)
+
 [FontAwesome](https://www.npmjs.com/package/@fortawesome/fontawesome-svg-core)
+
 [sweetalert2](https://www.npmjs.com/package/sweetalert2)
